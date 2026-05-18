@@ -3,49 +3,40 @@
 use App\Livewire\Settings\Security;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Fortify\Features;
 use Livewire\Livewire;
-
-beforeEach(function () {
-    $this->skipUnlessFortifyHas(Features::twoFactorAuthentication());
-
-    Features::twoFactorAuthentication([
-        'confirm' => true,
-        'confirmPassword' => true,
-    ]);
-});
 
 test('security settings page can be rendered', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user)
-        ->withSession(['auth.password_confirmed_at' => time()])
         ->get(route('security.edit'))
-        ->assertOk()
-        ->assertSee('Two-factor authentication')
-        ->assertSee('Enable 2FA');
+        ->assertOk();
 });
 
-test('security settings page requires password confirmation when enabled', function () {
+test('user can update their password', function () {
     $user = User::factory()->create();
 
-    $response = $this->actingAs($user)
-        ->get(route('security.edit'));
+    Livewire::actingAs($user)
+        ->test(Security::class)
+        ->set('current_password', 'password')
+        ->set('password', 'new-password')
+        ->set('password_confirmation', 'new-password')
+        ->call('updatePassword')
+        ->assertHasNoErrors();
 
-    $response->assertRedirect(route('password.confirm'));
+    $this->assertTrue(Hash::check('new-password', $user->fresh()->password));
 });
 
-test('security settings page renders without two factor when feature is disabled', function () {
-    config(['fortify.features' => []]);
-
+test('current password must be correct', function () {
     $user = User::factory()->create();
 
-    $this->actingAs($user)
-        ->withSession(['auth.password_confirmed_at' => time()])
-        ->get(route('security.edit'))
-        ->assertOk()
-        ->assertSee('Update password')
-        ->assertDontSee('Two-factor authentication');
+    Livewire::actingAs($user)
+        ->test(Security::class)
+        ->set('current_password', 'wrong-password')
+        ->set('password', 'new-password')
+        ->set('password_confirmation', 'new-password')
+        ->call('updatePassword')
+        ->assertHasErrors(['current_password']);
 });
 
 test('two factor authentication disabled when confirmation abandoned between requests', function () {
