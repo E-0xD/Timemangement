@@ -262,21 +262,31 @@
 
 ---
 
-## Phase 12: Admin Panel
+## Phase 12: Admin Panel ✅
 
-- [ ] `Admin\UserController`
-- [ ] `Admin\DashboardController`
-- [ ] Announcements
-- [ ] Role-based middleware
+### Completed
+- [x] `App\Http\Middleware\EnsureUserIsAdmin` — 403 abort if not admin, registered as `admin` alias in `bootstrap/app.php`
+- [x] `Admin\DashboardController@index` — total users, new this week, today's sessions, active groups, total tasks, recent registrations
+- [x] `Admin\UserController` — index (search + role filter, paginated), show (with stats), edit, update, destroy, toggleRole
+- [x] Admin views: `admin/dashboard.blade.php`, `admin/users/index.blade.php`, `admin/users/show.blade.php`, `admin/users/edit.blade.php`
+- [x] Routes: `Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')` group with dashboard + user resource + toggle-role
+- [x] Sidebar: Admin group (Admin Panel + Manage Users) visible only to `isAdmin()` users
 
 ---
 
-## Phase 13: Extended Settings
+## Phase 13: Extended Settings ✅
 
-- [ ] Profile page: school, department, course, semester
-- [ ] Notification preferences page
-- [ ] Avatar upload
-- [ ] Timezone / language preferences
+### Completed
+- [x] Migration: `notification_preferences` JSON column on `users` table
+- [x] `User` model: `notification_preferences` cast to array, `avatarUrl()` helper, `getNotificationPreference()` helper
+- [x] Extended `Profile` Livewire component: bio, phone, school, department_id, timezone, language + avatar upload (`WithFileUploads`)
+  - [x] Avatar stored on `public` disk at `avatars/{userId}/{file}`, old avatar deleted on replacement
+  - [x] `updateAvatar()` method, `commonTimezones()` + `supportedLanguages()` static helpers
+- [x] Updated `livewire/settings/profile.blade.php`: avatar preview/upload form, phone, school, department select, bio, timezone/language selects
+- [x] `NotificationPreferences` Livewire component: per-type toggles, defaults all enabled, saves to JSON
+- [x] `livewire/settings/notification-preferences.blade.php`: toggle switch row per NotificationType
+- [x] Settings layout nav: added "Notifications" item (`route('settings.notifications')`)
+- [x] `routes/settings.php`: added `settings/notifications` Livewire route
 
 ---
 
