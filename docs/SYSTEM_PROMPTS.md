@@ -67,6 +67,7 @@ Complete one phase fully (controllers + requests + views + tests) before moving 
 - **Every completed feature and every bug fix must be committed before proceeding to the next.**
 - Do **not** batch everything into one commit. Each logical unit of work gets its own commit.
 - Commit order must follow build order — commit what was done first, then the next, then the next.
+- **Before every commit**, run automated tests first, then open the browser and manually verify the built feature works end-to-end (navigate to the relevant page, interact with it, confirm no visible errors or broken UI). Only commit after both pass.
 - Commit message format:
   - Features: `feat: <short description>` (e.g. `feat: custom auth system with email verification`)
   - Bug fixes: `fix: <short description>` (e.g. `fix: remove stale Fortify bootstrap cache reference`)
