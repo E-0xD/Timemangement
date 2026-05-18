@@ -21,10 +21,10 @@
 
                 {{-- Academic --}}
                 <flux:sidebar.group :heading="__('Academic')" class="grid">
-                    <flux:sidebar.item icon="check-square" :href="route('tasks.index')" :current="request()->routeIs('tasks.*')" wire:navigate>
+                    <flux:sidebar.item icon="clipboard-document-check" :href="route('tasks.index')" :current="request()->routeIs('tasks.*')" wire:navigate>
                         {{ __('Tasks') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="calendar-range" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="calendar-date-range" href="#" class="opacity-40 pointer-events-none select-none">
                         {{ __('Timetable') }}
                     </flux:sidebar.item>
                     <flux:sidebar.item icon="calendar-days" href="#" class="opacity-40 pointer-events-none select-none">
@@ -34,7 +34,7 @@
 
                 {{-- Productivity --}}
                 <flux:sidebar.group :heading="__('Productivity')" class="grid">
-                    <flux:sidebar.item icon="timer" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="clock" href="#" class="opacity-40 pointer-events-none select-none">
                         {{ __('Focus Timer') }}
                     </flux:sidebar.item>
                     <flux:sidebar.item icon="flag" href="#" class="opacity-40 pointer-events-none select-none">
@@ -44,7 +44,7 @@
 
                 {{-- Library --}}
                 <flux:sidebar.group :heading="__('Library')" class="grid">
-                    <flux:sidebar.item icon="notebook-pen" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="document-text" href="#" class="opacity-40 pointer-events-none select-none">
                         {{ __('Notes') }}
                     </flux:sidebar.item>
                     <flux:sidebar.item icon="folder-open" href="#" class="opacity-40 pointer-events-none select-none">
@@ -54,10 +54,10 @@
 
                 {{-- Reports & Social --}}
                 <flux:sidebar.group :heading="__('Reports')" class="grid">
-                    <flux:sidebar.item icon="bar-chart-2" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="chart-bar" href="#" class="opacity-40 pointer-events-none select-none">
                         {{ __('Analytics') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="users" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="user-group" href="#" class="opacity-40 pointer-events-none select-none">
                         {{ __('Study Groups') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
@@ -67,7 +67,7 @@
             <flux:spacer />
 
             <flux:sidebar.nav>
-                <flux:sidebar.item icon="settings" :href="route('profile.edit')" :current="request()->routeIs('profile.*')" wire:navigate>
+                <flux:sidebar.item icon="cog-6-tooth" :href="route('profile.edit')" :current="request()->routeIs('profile.*')" wire:navigate>
                     {{ __('Settings') }}
                 </flux:sidebar.item>
             </flux:sidebar.nav>
