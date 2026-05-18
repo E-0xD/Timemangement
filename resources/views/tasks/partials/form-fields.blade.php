@@ -6,7 +6,8 @@
       $subtasksData – JSON-encoded array for Alpine (edit only)
 --}}
 @php
-    $isEdit       = isset($task) && $task->exists;
+    $task         ??= null;
+    $isEdit       = $task?->exists === true;
     $subtasksJson = $isEdit ? json_encode($subtasksData ?? []) : '[]';
 @endphp
 
@@ -21,7 +22,7 @@
                 <flux:label>Title <span class="text-red-500">*</span></flux:label>
                 <flux:input
                     name="title"
-                    :value="old('title', $task->title ?? '')"
+                    :value="old('title', $task?->title ?? '')"
                     placeholder="e.g. Write lab report for Chemistry"
                     autofocus
                     required
@@ -38,7 +39,7 @@
                     name="description"
                     rows="4"
                     placeholder="Add notes, instructions, or details..."
-                >{{ old('description', $task->description ?? '') }}</flux:textarea>
+                >{{ old('description', $task?->description ?? '') }}</flux:textarea>
                 <flux:error name="description" />
             </flux:field>
         </div>
@@ -129,7 +130,7 @@
                 <select name="course_id" class="w-full px-3 py-2 text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-slate-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <option value="">No course</option>
                     @foreach ($courses as $course)
-                        <option value="{{ $course->id }}" @selected(old('course_id', $task->course_id ?? '') == $course->id)>
+                        <option value="{{ $course->id }}" @selected(old('course_id', $task?->course_id ?? '') == $course->id)>
                             {{ $course->name }}{{ $course->code ? ' (' . $course->code . ')' : '' }}
                         </option>
                     @endforeach
@@ -143,7 +144,7 @@
                 <select name="category" required class="w-full px-3 py-2 text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-slate-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <option value="">Select category</option>
                     @foreach (\App\Enums\TaskCategory::cases() as $case)
-                        <option value="{{ $case->value }}" @selected(old('category', $task->category?->value ?? '') === $case->value)>{{ $case->label() }}</option>
+                        <option value="{{ $case->value }}" @selected(old('category', $task?->category?->value ?? '') === $case->value)>{{ $case->label() }}</option>
                     @endforeach
                 </select>
                 <flux:error name="category" />
@@ -155,7 +156,7 @@
                 <select name="priority" required class="w-full px-3 py-2 text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-slate-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <option value="">Select priority</option>
                     @foreach (\App\Enums\TaskPriority::cases() as $case)
-                        <option value="{{ $case->value }}" @selected(old('priority', $task->priority?->value ?? 'medium') === $case->value)>{{ $case->label() }}</option>
+                        <option value="{{ $case->value }}" @selected(old('priority', $task?->priority?->value ?? 'medium') === $case->value)>{{ $case->label() }}</option>
                     @endforeach
                 </select>
                 <flux:error name="priority" />
@@ -180,7 +181,7 @@
                 <flux:input
                     type="date"
                     name="due_date"
-                    :value="old('due_date', $task->due_date?->format('Y-m-d') ?? '')"
+                    :value="old('due_date', $task?->due_date?->format('Y-m-d') ?? '')"
                 />
                 <flux:error name="due_date" />
             </flux:field>
@@ -191,7 +192,7 @@
                 <flux:input
                     type="time"
                     name="due_time"
-                    :value="old('due_time', $task->due_time ?? '')"
+                    :value="old('due_time', $task?->due_time ?? '')"
                 />
                 <flux:error name="due_time" />
             </flux:field>
@@ -208,7 +209,7 @@
                     id="is_recurring"
                     name="is_recurring"
                     value="1"
-                    @checked(old('is_recurring', $task->is_recurring ?? false))
+                    @checked(old('is_recurring', $task?->is_recurring ?? false))
                     class="rounded border-zinc-300 dark:border-zinc-600 text-indigo-600 focus:ring-indigo-500"
                 />
                 <label for="is_recurring" class="text-sm text-slate-700 dark:text-zinc-300 cursor-pointer">
