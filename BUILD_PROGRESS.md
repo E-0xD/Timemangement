@@ -171,21 +171,24 @@
 
 ---
 
-## Phase 7: Productivity Tools
+## Phase 7: Productivity Tools ✅
 
-- [ ] Pomodoro timer (Livewire component)
-- [ ] Focus mode
-- [ ] `StudySessionController`
-- [ ] Session history view
+### Completed
+- [x] `StudySessionController` — `focus()` view loader, `store()` (save completed session), `destroy()`
+- [x] `StoreStudySessionRequest` — type enum, duration 1–480 min, course/task ownership
+- [x] `focus/index.blade.php` — Alpine.js Pomodoro timer with SVG ring progress, phase tabs (Focus/Short Break/Long Break), pause/resume/reset, sound beep via Web Audio API, customisable durations (settings panel), course + task context selectors, today's sessions log, manual session logger
+- [x] Sidebar: Focus Timer link activated
+- [x] Routes: GET `/focus`, POST `/sessions`, DELETE `/sessions/{session}`
 
 ---
 
-## Phase 8: Analytics & Reports
+## Phase 8: Analytics & Reports ✅
 
-- [ ] `AnalyticsController`
-- [ ] Study hours chart
-- [ ] Task completion rate chart
-- [ ] Productivity heatmap
+### Completed
+- [x] `AnalyticsController` — index with last-14-day study data, task breakdown, top courses, totals
+- [x] `analytics/index.blade.php` — 4 summary stat cards, CSS bar chart (14-day study time), task-by-status progress bars, top courses horizontal bars (last 30 days)
+- [x] Sidebar: Analytics link activated
+- [x] Route: GET `/analytics`
 
 ---
 

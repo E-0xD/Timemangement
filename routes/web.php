@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\CalendarEventController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\StudySessionController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TimetableController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +30,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.readAll');
     Route::post('notifications/{notification}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
     Route::delete('notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+
+    // Focus Timer + Study Sessions
+    Route::get('focus', [StudySessionController::class, 'focus'])->name('focus.index');
+    Route::post('sessions', [StudySessionController::class, 'store'])->name('sessions.store');
+    Route::delete('sessions/{session}', [StudySessionController::class, 'destroy'])->name('sessions.destroy');
+
+    // Analytics
+    Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 });
 
 require __DIR__.'/auth.php';
