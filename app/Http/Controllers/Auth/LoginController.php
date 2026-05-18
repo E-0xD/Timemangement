@@ -21,7 +21,11 @@ class LoginController extends Controller
             $request->authenticate();
             $request->session()->regenerate();
 
-            return redirect()->intended(route('dashboard', absolute: false));
+            $default = $request->user()->isAdmin()
+                ? route('admin.dashboard', absolute: false)
+                : route('dashboard', absolute: false);
+
+            return redirect()->intended($default);
         } catch (\Illuminate\Validation\ValidationException $e) {
             throw $e;
         } catch (\Exception $e) {
