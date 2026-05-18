@@ -1,17 +1,17 @@
 <x-layouts::auth :title="__('Forgot Password')">
-    <div class="flex flex-col gap-6">
+    <div>
         <x-auth-header
             :title="__('Forgot your password?')"
             :description="__('Enter your email and we\'ll send you a reset link')"
         />
 
         @if (session('status'))
-            <div class="text-sm font-medium text-center text-green-600 dark:text-green-400">
+            <div class="mb-5 text-sm text-green-600">
                 {{ session('status') }}
             </div>
         @endif
 
-        <form method="POST" action="{{ route('password.email') }}" class="flex flex-col gap-6">
+        <form method="POST" action="{{ route('password.email') }}" class="space-y-5">
             @csrf
 
             <div>
@@ -26,7 +26,7 @@
                     placeholder="you@example.com"
                 />
                 @error('email')
-                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -35,8 +35,8 @@
             </flux:button>
         </form>
 
-        <div class="text-sm text-center text-zinc-600 dark:text-zinc-400">
-            <flux:link :href="route('login')">{{ __('Back to sign in') }}</flux:link>
-        </div>
+        <p class="mt-8 text-center text-sm text-slate-500">
+            <a href="{{ route('login') }}" class="text-indigo-600 hover:text-indigo-700 font-medium">{{ __('Back to sign in') }}</a>
+        </p>
     </div>
 </x-layouts::auth>

@@ -1,32 +1,37 @@
 <x-layouts::auth :title="__('Verify Email')">
-    <div class="flex flex-col gap-6">
+    <div>
         <x-auth-header
             :title="__('Verify your email')"
             :description="__('Check your inbox and click the verification link')"
         />
 
         @if (session('status') === 'verification-link-sent')
-            <div class="text-sm font-medium text-center text-green-600 dark:text-green-400">
+            <div class="mb-5 text-sm text-green-600">
                 {{ __('A new verification link has been sent to your email address.') }}
             </div>
         @endif
 
-        <flux:text class="text-center text-sm text-zinc-600 dark:text-zinc-400">
-            {{ __("Thanks for signing up! Before getting started, please verify your email address by clicking on the link we sent you.") }}
-        </flux:text>
+        <p class="mb-6 text-sm text-slate-500 leading-relaxed">
+            {{ __("Thanks for signing up! Before getting started, please verify your email address by clicking on the link we just sent you.") }}
+        </p>
 
-        <form method="POST" action="{{ route('verification.send') }}" class="flex flex-col gap-4">
-            @csrf
-            <flux:button variant="primary" type="submit" class="w-full">
-                {{ __('Resend verification email') }}
-            </flux:button>
-        </form>
+        <div class="space-y-3">
+            <form method="POST" action="{{ route('verification.send') }}">
+                @csrf
+                <flux:button variant="primary" type="submit" class="w-full">
+                    {{ __('Resend verification email') }}
+                </flux:button>
+            </form>
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <flux:button variant="ghost" type="submit" class="w-full">
-                {{ __('Sign out') }}
-            </flux:button>
-        </form>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button
+                    type="submit"
+                    class="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 hover:bg-zinc-50 transition-colors"
+                >
+                    {{ __('Sign out') }}
+                </button>
+            </form>
+        </div>
     </div>
 </x-layouts::auth>

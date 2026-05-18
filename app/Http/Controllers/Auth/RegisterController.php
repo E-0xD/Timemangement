@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -17,17 +18,21 @@ class RegisterController extends Controller
 {
     public function create(): View
     {
-        return view('auth.register');
+        $departments = Department::orderBy('name')->get();
+
+        return view('auth.register', compact('departments'));
     }
 
     public function store(RegisterRequest $request): RedirectResponse
     {
         try {
             $user = User::create([
-                'name'     => $request->name,
-                'email'    => $request->email,
-                'password' => Hash::make($request->password),
-                'role'     => UserRole::Student->value,
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'password'      => Hash::make($request->password),
+                'role'          => UserRole::Student->value,
+                'school'        => $request->school,
+                'department_id' => $request->department_id,
             ]);
 
             event(new Registered($user));

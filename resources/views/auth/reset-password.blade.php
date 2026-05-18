@@ -1,11 +1,11 @@
 <x-layouts::auth :title="__('Reset Password')">
-    <div class="flex flex-col gap-6">
+    <div>
         <x-auth-header
             :title="__('Set new password')"
             :description="__('Choose a strong password for your account')"
         />
 
-        <form method="POST" action="{{ route('password.store') }}" class="flex flex-col gap-6">
+        <form method="POST" action="{{ route('password.store') }}" class="space-y-5">
             @csrf
 
             <input type="hidden" name="token" value="{{ $token }}">
@@ -22,7 +22,7 @@
                     placeholder="you@example.com"
                 />
                 @error('email')
-                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -37,7 +37,7 @@
                     viewable
                 />
                 @error('password')
-                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                 @enderror
             </div>
 
