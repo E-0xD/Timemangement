@@ -9,15 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('student')->after('password');
-            $table->string('avatar')->nullable()->after('role');
-            $table->string('bio', 500)->nullable()->after('avatar');
-            $table->string('phone', 20)->nullable()->after('bio');
-            $table->string('school')->nullable()->after('phone');
-            $table->string('timezone', 100)->default('UTC')->after('school');
-            $table->string('language', 10)->default('en')->after('timezone');
-            $table->string('telegram_chat_id')->nullable()->after('language');
-            $table->boolean('dark_mode')->default(false)->after('telegram_chat_id');
+            $table->string('role')->default('student');
+            $table->string('avatar')->nullable();
+            $table->string('bio', 500)->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->string('school')->nullable();
+            $table->string('timezone', 100)->default('UTC');
+            $table->string('language', 10)->default('en');
+            $table->string('telegram_chat_id')->nullable();
+            $table->boolean('dark_mode')->default(false);
         });
     }
 

@@ -9,10 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('department_id')->nullable()->constrained('departments')->nullOnDelete()->after('school');
-            $table->unsignedInteger('xp_points')->default(0)->after('dark_mode');
-            $table->unsignedInteger('study_streak')->default(0)->after('xp_points');
-            $table->date('last_study_date')->nullable()->after('study_streak');
+            $table->foreignId('department_id')->nullable()->constrained('departments')->nullOnDelete();
+            $table->unsignedInteger('xp_points')->default(0);
+            $table->unsignedInteger('study_streak')->default(0);
+            $table->date('last_study_date')->nullable();
         });
     }
 
