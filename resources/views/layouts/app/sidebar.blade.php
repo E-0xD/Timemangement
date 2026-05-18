@@ -44,7 +44,7 @@
                     <flux:sidebar.item icon="clock" :href="route('focus.index')" :current="request()->routeIs('focus.*')" wire:navigate>
                         {{ __('Focus Timer') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="flag" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="flag" :href="route('goals.index')" :current="request()->routeIs('goals.*')" wire:navigate>
                         {{ __('Goals') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
@@ -64,7 +64,7 @@
                     <flux:sidebar.item icon="chart-bar" :href="route('analytics.index')" :current="request()->routeIs('analytics.*')" wire:navigate>
                         {{ __('Analytics') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="user-group" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="user-group" :href="route('groups.index')" :current="request()->routeIs('groups.*')" wire:navigate>
                         {{ __('Study Groups') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>

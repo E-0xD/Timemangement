@@ -3,7 +3,9 @@
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\CalendarEventController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\StudyGroupController;
 use App\Http\Controllers\StudySessionController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TimetableController;
@@ -38,6 +40,18 @@ Route::middleware(['auth'])->group(function () {
 
     // Analytics
     Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
+
+    // Goals
+    Route::resource('goals', GoalController::class)->except(['show']);
+    Route::patch('goals/{goal}/progress', [GoalController::class, 'updateProgress'])->name('goals.progress');
+
+    // Study Groups
+    Route::post('groups/join', [StudyGroupController::class, 'join'])->name('groups.join');
+    Route::delete('groups/{group}/leave', [StudyGroupController::class, 'leave'])->name('groups.leave');
+    Route::post('groups/{group}/messages', [StudyGroupController::class, 'postMessage'])->name('groups.messages.store');
+    Route::delete('groups/{group}/messages/{message}', [StudyGroupController::class, 'deleteMessage'])->name('groups.messages.destroy');
+    Route::delete('groups/{group}/members/{user}', [StudyGroupController::class, 'removeMember'])->name('groups.members.destroy');
+    Route::resource('groups', StudyGroupController::class);
 });
 
 require __DIR__.'/auth.php';

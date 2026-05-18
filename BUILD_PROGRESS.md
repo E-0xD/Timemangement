@@ -192,21 +192,32 @@
 
 ---
 
-## Phase 9: Goals & Progress
+## Phase 9: Goals & Progress ✅
 
-- [ ] `GoalController`
-- [ ] `StoreGoalRequest`, `UpdateGoalRequest`
-- [ ] Goal list + progress bars view
-- [ ] Streak tracking
+### Completed
+- [x] `GoalController` — index (with filter: all/active/completed), create, store, edit, update, destroy, updateProgress
+- [x] `StoreGoalRequest` + `UpdateGoalRequest` — category/period enum validation, target/current value, target date
+- [x] `goals/index.blade.php` — filter tabs, goal cards with progress bars, quick update progress form inline, deadline display, completed/overdue badges
+- [x] `goals/create.blade.php` + `goals/edit.blade.php` + `goals/partials/form-fields.blade.php`
+- [x] Auto-mark completed when current_value >= target_value
+- [x] Sidebar: Goals link activated
+- [x] Routes: `Route::resource('goals')` (no show) + `PATCH /goals/{goal}/progress`
 
 ---
 
-## Phase 10: Collaboration
+## Phase 10: Collaboration ✅
 
-- [ ] `StudyGroupController`
-- [ ] Group members management
-- [ ] Shared task board
-- [ ] Group chat (Livewire + Reverb)
+### Completed
+- [x] `StudyGroupController` — index, create, store, show, edit, update, destroy, join (invite code), leave, postMessage, deleteMessage, removeMember
+- [x] `StoreStudyGroupRequest` + `UpdateStudyGroupRequest` + `StoreMessageRequest`
+- [x] `study-groups/index.blade.php` — my groups + discover public groups + join by invite code form
+- [x] `study-groups/show.blade.php` — invite code display, message board with post/delete, members list with remove button (owner/admin)
+- [x] `study-groups/create.blade.php` + `study-groups/edit.blade.php` (with danger zone delete for owner)
+- [x] `study-groups/partials/form-fields.blade.php`
+- [x] Auto-generates invite code on group creation (via model boot)
+- [x] Role-based access: owner can delete, admin+owner can manage members + moderate messages
+- [x] Sidebar: Study Groups link activated
+- [x] Routes: `Route::resource('groups')` + join, leave, messages CRUD, members remove
 
 ---
 
