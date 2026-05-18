@@ -89,6 +89,11 @@ Complete one phase fully (controllers + requests + views + tests) before moving 
 - Typography: `text-slate-900` for headings, `text-slate-500` for descriptive text, `text-slate-700` for labels.
 - Error messages: `text-red-600 text-xs`. Success messages: `text-green-600 text-sm`.
 - Buttons: solid fill, no rounded-full pill shapes — use `rounded-lg`.
+- **No emojis** anywhere in the UI. Use **Material Symbols Outlined** icons for all iconography.
+  - Load via: `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />`
+  - Usage: `<span class="material-symbols-outlined">icon_name</span>`
+  - Icon names: use lowercase with underscores (e.g. `check`, `arrow_back`, `mail`, `lock`, `person`)
+- **Input fields must always have a visible border.** Flux inputs use `border-zinc-200` which is too faint on white — override with `border-zinc-300` via CSS in `app.css`.
 
 ---
 

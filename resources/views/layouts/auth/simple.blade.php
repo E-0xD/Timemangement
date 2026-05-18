@@ -23,7 +23,7 @@
                     <ul class="space-y-2 pt-2">
                         @foreach (['Plan tasks, set goals, and stay on track.', 'Log study sessions and measure progress.', 'Collaborate and grow with your peers.'] as $point)
                             <li class="flex items-start gap-2 text-sm text-slate-600">
-                                <span class="mt-0.5 text-indigo-500 font-bold leading-none">&#x2713;</span>
+                                <span class="material-symbols-outlined text-indigo-500 text-[18px] mt-px shrink-0">check</span>
                                 {{ $point }}
                             </li>
                         @endforeach
