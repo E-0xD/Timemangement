@@ -19,7 +19,6 @@
                 type="password"
                 required
                 autocomplete="new-password"
-                passwordrules="{{ \Illuminate\Validation\Rules\Password::defaults()->toPasswordRulesString() }}"
                 viewable
             />
             <flux:input
@@ -28,7 +27,6 @@
                 type="password"
                 required
                 autocomplete="new-password"
-                passwordrules="{{ \Illuminate\Validation\Rules\Password::defaults()->toPasswordRulesString() }}"
                 viewable
             />
 
@@ -36,8 +34,9 @@
                 <flux:button variant="primary" type="submit" data-test="update-password-button">{{ __('Save') }}</flux:button>
             </div>
         </form>
+    </x-settings.layout>
+</section>
 
-        @if ($canManageTwoFactor)
             <section class="mt-12">
                 <flux:heading>{{ __('Two-factor authentication') }}</flux:heading>
                 <flux:subheading>{{ __('Manage your two-factor authentication settings') }}</flux:subheading>
