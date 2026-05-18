@@ -144,20 +144,30 @@
 
 ---
 
-## Phase 5: Calendar System
+## Phase 5: Calendar System ✅
 
-- [ ] `CalendarEventController`
-- [ ] Monthly / weekly / daily views
-- [ ] Drag-and-drop rescheduling (Livewire)
+### Completed
+- [x] `CalendarEventController` — index (monthly grid), create, store, edit, update, destroy
+- [x] `StoreCalendarEventRequest` + `UpdateCalendarEventRequest` — with enum + course ownership validation
+- [x] Calendar views (Blade):
+  - [x] `calendar/index.blade.php` — monthly grid (Mon–Sun weeks), event pills with type colours, today highlight, +N more overflow, legend, empty state
+  - [x] `calendar/create.blade.php` — create form
+  - [x] `calendar/edit.blade.php` — edit + delete (separate forms, metadata sidebar)
+  - [x] `calendar/partials/form-fields.blade.php` — title, type, course, start/end datetime, all-day toggle (Alpine), location, description, recurring, colour presets
+- [x] Month navigation (prev/next/today links)
+- [x] Sidebar: Calendar link activated
+- [x] Routes: `Route::resource('calendar')` added (no show)
 
 ---
 
-## Phase 6: Notifications
+## Phase 6: Notifications ✅
 
-- [ ] In-app notification model + controller
-- [ ] Email notifications (queued Mailables)
-- [ ] Telegram bot integration
-- [ ] Notification preferences settings
+### Completed
+- [x] `NotificationController` — index (paginated list), markRead, markAllRead, destroy
+- [x] `notifications/index.blade.php` — unread count header, mark-all-read button, notification list with type icon, mark-read + delete per item, empty state
+- [x] Sidebar: Notifications link added to Overview group with live unread badge
+- [x] Mobile header: notification bell icon with unread count badge
+- [x] Routes: GET `/notifications`, POST `/notifications/read-all`, POST `/notifications/{notification}/read`, DELETE `/notifications/{notification}`
 
 ---
 

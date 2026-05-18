@@ -17,6 +17,13 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="bell" :href="route('notifications.index')" :current="request()->routeIs('notifications.*')" wire:navigate>
+                        {{ __('Notifications') }}
+                        @php $unreadNotifications = Auth::user()->appNotifications()->unread()->count(); @endphp
+                        @if($unreadNotifications > 0)
+                            <span class="ml-auto inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">{{ min($unreadNotifications, 99) }}</span>
+                        @endif
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
 
                 {{-- Academic --}}
@@ -27,7 +34,7 @@
                     <flux:sidebar.item icon="calendar-date-range" :href="route('timetable.index')" :current="request()->routeIs('timetable.*')" wire:navigate>
                         {{ __('Timetable') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="calendar-days" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="calendar-days" :href="route('calendar.index')" :current="request()->routeIs('calendar.*')" wire:navigate>
                         {{ __('Calendar') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
@@ -80,6 +87,21 @@
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
             <flux:spacer />
+
+            {{-- Notification bell (mobile header) --}}
+            @php $unreadNotifications = Auth::user()->appNotifications()->unread()->count(); @endphp
+            <div class="relative mr-1">
+                <a href="{{ route('notifications.index') }}"
+                   class="inline-flex h-8 w-8 items-center justify-center rounded-md text-zinc-500 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700"
+                   wire:navigate>
+                    <span class="material-symbols-outlined text-xl leading-none">notifications</span>
+                </a>
+                @if($unreadNotifications > 0)
+                    <span class="pointer-events-none absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                        {{ min($unreadNotifications, 9) }}
+                    </span>
+                @endif
+            </div>
 
             <flux:dropdown position="top" align="end">
                 <flux:profile

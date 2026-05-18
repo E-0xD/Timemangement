@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CalendarEventController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TimetableController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +19,15 @@ Route::middleware(['auth'])->group(function () {
 
     // Timetable
     Route::resource('timetable', TimetableController::class)->except(['show']);
+
+    // Calendar
+    Route::resource('calendar', CalendarEventController::class)->except(['show']);
+
+    // Notifications
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.readAll');
+    Route::post('notifications/{notification}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
+    Route::delete('notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
 });
 
 require __DIR__.'/auth.php';
