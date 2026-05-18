@@ -128,12 +128,19 @@
 
 ---
 
-## Phase 4: Timetable
+## Phase 4: Timetable ✅
 
-- [ ] `TimetableController`
-- [ ] `StoreTimetableRequest`, `UpdateTimetableRequest`
-- [ ] Weekly timetable view
-- [ ] Time conflict detection
+### Completed
+- [x] `TimetableController` — index, create, store, edit, update, destroy (no show; edit page doubles as detail)
+- [x] `StoreTimetableRequest` + `UpdateTimetableRequest` — enum validation, course ownership, end_time after start_time
+- [x] Time-conflict detection — prevents overlapping entries on same day for same user (excluded from self on update)
+- [x] Timetable views (Blade):
+  - [x] `timetable/index.blade.php` — interactive weekly CSS grid (07:00–22:00, 64px/hr), Alpine.js weekend toggle, list view cards below
+  - [x] `timetable/create.blade.php` — two-column form with color presets + custom picker
+  - [x] `timetable/edit.blade.php` — same form, separate delete form (no nested forms)
+  - [x] `timetable/partials/form-fields.blade.php` — shared partial with `$entry ??= null` null-safe pattern
+- [x] Sidebar: Timetable link activated (was greyed out)
+- [x] Routes: `Route::resource('timetable')` added to `routes/web.php`
 
 ---
 

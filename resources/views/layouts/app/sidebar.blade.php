@@ -24,7 +24,7 @@
                     <flux:sidebar.item icon="clipboard-document-check" :href="route('tasks.index')" :current="request()->routeIs('tasks.*')" wire:navigate>
                         {{ __('Tasks') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="calendar-date-range" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="calendar-date-range" :href="route('timetable.index')" :current="request()->routeIs('timetable.*')" wire:navigate>
                         {{ __('Timetable') }}
                     </flux:sidebar.item>
                     <flux:sidebar.item icon="calendar-days" href="#" class="opacity-40 pointer-events-none select-none">
