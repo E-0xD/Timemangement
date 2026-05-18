@@ -3,7 +3,10 @@
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\CalendarEventController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\GamificationController;
 use App\Http\Controllers\GoalController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\StudyGroupController;
 use App\Http\Controllers\StudySessionController;
@@ -52,6 +55,18 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('groups/{group}/messages/{message}', [StudyGroupController::class, 'deleteMessage'])->name('groups.messages.destroy');
     Route::delete('groups/{group}/members/{user}', [StudyGroupController::class, 'removeMember'])->name('groups.members.destroy');
     Route::resource('groups', StudyGroupController::class);
+
+    // Gamification
+    Route::get('achievements', [GamificationController::class, 'index'])->name('achievements.index');
+
+    // Notes
+    Route::resource('notes', NoteController::class);
+
+    // Files
+    Route::get('files', [FileController::class, 'index'])->name('files.index');
+    Route::post('files', [FileController::class, 'store'])->name('files.store');
+    Route::get('files/{file}/download', [FileController::class, 'download'])->name('files.download');
+    Route::delete('files/{file}', [FileController::class, 'destroy'])->name('files.destroy');
 });
 
 require __DIR__.'/auth.php';

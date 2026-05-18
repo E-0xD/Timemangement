@@ -7,6 +7,7 @@ use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Models\Subtask;
 use App\Models\Task;
+use App\Services\AwardAchievementService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -197,6 +198,7 @@ class TaskController extends Controller
                 $task->update(['status' => TaskStatus::Pending->value, 'completed_at' => null]);
             } else {
                 $task->update(['status' => TaskStatus::Completed->value, 'completed_at' => now()]);
+                (new AwardAchievementService())->recordTaskCompletion(Auth::user());
             }
 
             return back();

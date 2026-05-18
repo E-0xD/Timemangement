@@ -221,11 +221,44 @@
 
 ---
 
-## Phase 11: Gamification
+## Phase 11: Gamification ✅
 
-- [ ] XP system
-- [ ] Badge / achievement award logic
-- [ ] Leaderboard view
+### Completed
+- [x] `AchievementType` enum + seeded 14 achievements (`AchievementSeeder`)
+- [x] `AwardAchievementService` — XP increment, streak tracking, achievement threshold checks
+  - [x] `recordStudySession($user, $minutes)` — 1 XP/min, update streak, check awards
+  - [x] `recordTaskCompletion($user)` — +10 XP, check awards
+  - [x] `recordGoalCompletion($user)` — +50 XP, check awards
+  - [x] `updateStreak($user)` — consecutive-day streak logic
+  - [x] `checkAndAward($user)` — grants unearned achievements that pass thresholds
+- [x] Hooked into existing controllers:
+  - [x] `StudySessionController@store` — calls `recordStudySession` after save
+  - [x] `TaskController@toggle` — calls `recordTaskCompletion` when toggling to Completed
+  - [x] `GoalController@updateProgress` — calls `recordGoalCompletion` when goal just completed
+- [x] `GamificationController@index` — earned/locked achievements, leaderboard top-10, level/XP computed
+- [x] `gamification/index.blade.php` — XP level card, streak card, earned badge grid, locked badge grid, leaderboard sidebar
+- [x] Sidebar: Achievements link added to Productivity group
+- [x] Route: GET `/achievements`
+
+---
+
+## Library: Notes & File Management ✅
+
+### Notes
+- [x] `NoteController` — index (search + course filter, paginated), create, store, show, edit, update, destroy
+- [x] `StoreNoteRequest` + `UpdateNoteRequest` — title, content, course_id (ownership check)
+- [x] Notes views: `notes/index.blade.php`, `notes/create.blade.php`, `notes/show.blade.php`, `notes/edit.blade.php`, `notes/partials/form-fields.blade.php`
+- [x] Sidebar: Notes link activated
+- [x] Routes: `Route::resource('notes')`
+
+### Files
+- [x] `FileController` — index (file_type + course filter, paginated), store (upload to private disk), download (StreamedResponse), destroy
+- [x] `StoreFileRequest` — 25 MB max, allowed mime types, course/task ownership
+- [x] Upload path: `files/{user_id}/{uuid}.ext` on `private` disk
+- [x] `FileType::fromMime()` auto-detects type from uploaded MIME
+- [x] `files/index.blade.php` — upload form, filter bar, file list with type icon + size + download + delete
+- [x] Sidebar: Files link activated
+- [x] Routes: GET/POST `/files`, GET `/files/{file}/download`, DELETE `/files/{file}`
 
 ---
 

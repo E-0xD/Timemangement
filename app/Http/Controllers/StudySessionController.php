@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\TaskStatus;
 use App\Http\Requests\StudySession\StoreStudySessionRequest;
 use App\Models\StudySession;
+use App\Services\AwardAchievementService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -49,6 +50,8 @@ class StudySessionController extends Controller
                 'duration_minutes' => $duration,
                 'notes'            => $request->validated('notes'),
             ]);
+
+            (new AwardAchievementService())->recordStudySession(Auth::user(), $duration);
 
             return back()->with('session_saved', true);
         } catch (\Throwable $e) {

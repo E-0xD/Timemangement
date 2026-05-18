@@ -47,14 +47,17 @@
                     <flux:sidebar.item icon="flag" :href="route('goals.index')" :current="request()->routeIs('goals.*')" wire:navigate>
                         {{ __('Goals') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="trophy" :href="route('achievements.index')" :current="request()->routeIs('achievements.*')" wire:navigate>
+                        {{ __('Achievements') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
 
                 {{-- Library --}}
                 <flux:sidebar.group :heading="__('Library')" class="grid">
-                    <flux:sidebar.item icon="document-text" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="document-text" :href="route('notes.index')" :current="request()->routeIs('notes.*')" wire:navigate>
                         {{ __('Notes') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="folder-open" href="#" class="opacity-40 pointer-events-none select-none">
+                    <flux:sidebar.item icon="folder-open" :href="route('files.index')" :current="request()->routeIs('files.*')" wire:navigate>
                         {{ __('Files') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>

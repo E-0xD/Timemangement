@@ -7,6 +7,7 @@ use App\Enums\GoalPeriod;
 use App\Http\Requests\Goal\StoreGoalRequest;
 use App\Http\Requests\Goal\UpdateGoalRequest;
 use App\Models\Goal;
+use App\Services\AwardAchievementService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -132,6 +133,7 @@ class GoalController extends Controller
                 'current_value' => ['required', 'numeric', 'min:0'],
             ]);
 
+            $wasCompleted = (bool) $goal->is_completed;
             $goal->current_value = $validated['current_value'];
 
             if ((float) $goal->current_value >= (float) $goal->target_value) {
@@ -143,6 +145,10 @@ class GoalController extends Controller
             }
 
             $goal->save();
+
+            if ($goal->is_completed && !$wasCompleted) {
+                (new AwardAchievementService())->recordGoalCompletion(Auth::user());
+            }
 
             return back()->with('success', 'Progress updated.');
         } catch (\Illuminate\Validation\ValidationException $e) {
