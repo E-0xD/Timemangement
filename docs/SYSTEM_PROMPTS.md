@@ -75,6 +75,23 @@ Complete one phase fully (controllers + requests + views + tests) before moving 
 
 ---
 
+### 13. UI Design System
+
+- **Color palette — three colors only:**
+  - **Primary**: `#4F46E5` (indigo-600) — buttons, links, focus rings, active states
+  - **Secondary**: `#0F172A` (slate-900) — headings, key text, dark surfaces
+  - **Light**: `#EEF2FF` (indigo-50) — page backgrounds, subtle fills, left panels
+- **No gradients** anywhere in the application — no `bg-gradient-*`, no `bg-linear-*`, no `from-*`/`to-*` classes.
+- **No cliché design patterns**: no wavy SVG backgrounds, no floating decorative shapes, no stock illustration heroes, no heavy drop shadows.
+- **Borders must be full-perimeter or none.** Never use one-sided borders (`border-t`, `border-b`, `border-l`, `border-r` alone).
+- **Thin borders only**: always use `border` (1px). Never `border-2` or thicker.
+- Use `shadow-xs` or `shadow-sm` at most — no dramatic box shadows.
+- Typography: `text-slate-900` for headings, `text-slate-500` for descriptive text, `text-slate-700` for labels.
+- Error messages: `text-red-600 text-xs`. Success messages: `text-green-600 text-sm`.
+- Buttons: solid fill, no rounded-full pill shapes — use `rounded-lg`.
+
+---
+
 ## Tech Stack Reference
 
 | | |
