@@ -100,15 +100,31 @@
 
 ---
 
-## Phase 3: Task Management
+## Phase 3: Task Management ✅
 
-- [ ] `TaskController` (index, create, store, show, edit, update, destroy)
-- [ ] `StoreTaskRequest`, `UpdateTaskRequest`
-- [ ] Task list view (Blade)
-- [ ] Kanban board (Livewire — heavy interactivity)
-- [ ] Subtask CRUD
-- [ ] File attachments upload
-- [ ] Task filters + search
+### Completed
+- [x] `DashboardController` — stats, upcoming tasks, recently completed, quick links
+- [x] `resources/views/dashboard.blade.php` — stats row (4 cards), upcoming tasks list, study streak, recently completed
+- [x] `TaskController` — index, create, store, show, edit, update, destroy, toggle, toggleSubtask
+- [x] `StoreTaskRequest` — validated with enum rules, course ownership check
+- [x] `UpdateTaskRequest` — same rules + status, subtask is_completed
+- [x] Task views (Blade):
+  - [x] `tasks/index.blade.php` — list with filter bar (status, priority, category, course, search), paginated table
+  - [x] `tasks/create.blade.php` — two-column form with Alpine.js dynamic subtask list
+  - [x] `tasks/edit.blade.php` — reuses form partial, separate delete form (no nesting)
+  - [x] `tasks/show.blade.php` — detail view with subtask toggle, completion progress bar
+  - [x] `tasks/partials/form-fields.blade.php` — shared form partial
+- [x] Reusable components:
+  - [x] `components/stat-card.blade.php` — color-coded stat widget with icon
+  - [x] `components/task-badge.blade.php` — priority / status / category badge
+  - [x] `components/page-header.blade.php` — consistent page header with back link + actions slot
+- [x] Sidebar navigation rebuilt — Dashboard, Tasks (live), Timetable/Calendar/Goals/Notes/Files/Analytics/Groups (greyed out)
+- [x] `routes/web.php` — DashboardController, task resource routes, toggle + subtask toggle routes
+
+### Not yet in Phase 3 (future)
+- [ ] Kanban board (Livewire — heavy drag-and-drop)
+- [ ] File attachment upload
+- [ ] Bulk actions on task list
 
 ---
 

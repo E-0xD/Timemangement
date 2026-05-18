@@ -11,22 +11,64 @@
             </flux:sidebar.header>
 
             <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Platform')" class="grid">
+
+                {{-- Overview --}}
+                <flux:sidebar.group :heading="__('Overview')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
+
+                {{-- Academic --}}
+                <flux:sidebar.group :heading="__('Academic')" class="grid">
+                    <flux:sidebar.item icon="check-square" :href="route('tasks.index')" :current="request()->routeIs('tasks.*')" wire:navigate>
+                        {{ __('Tasks') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="calendar-range" href="#" class="opacity-40 pointer-events-none select-none">
+                        {{ __('Timetable') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="calendar-days" href="#" class="opacity-40 pointer-events-none select-none">
+                        {{ __('Calendar') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                {{-- Productivity --}}
+                <flux:sidebar.group :heading="__('Productivity')" class="grid">
+                    <flux:sidebar.item icon="timer" href="#" class="opacity-40 pointer-events-none select-none">
+                        {{ __('Focus Timer') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="flag" href="#" class="opacity-40 pointer-events-none select-none">
+                        {{ __('Goals') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                {{-- Library --}}
+                <flux:sidebar.group :heading="__('Library')" class="grid">
+                    <flux:sidebar.item icon="notebook-pen" href="#" class="opacity-40 pointer-events-none select-none">
+                        {{ __('Notes') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="folder-open" href="#" class="opacity-40 pointer-events-none select-none">
+                        {{ __('Files') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                {{-- Reports & Social --}}
+                <flux:sidebar.group :heading="__('Reports')" class="grid">
+                    <flux:sidebar.item icon="bar-chart-2" href="#" class="opacity-40 pointer-events-none select-none">
+                        {{ __('Analytics') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="users" href="#" class="opacity-40 pointer-events-none select-none">
+                        {{ __('Study Groups') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
             </flux:sidebar.nav>
 
             <flux:spacer />
 
             <flux:sidebar.nav>
-                <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                    {{ __('Repository') }}
-                </flux:sidebar.item>
-
-                <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                    {{ __('Documentation') }}
+                <flux:sidebar.item icon="settings" :href="route('profile.edit')" :current="request()->routeIs('profile.*')" wire:navigate>
+                    {{ __('Settings') }}
                 </flux:sidebar.item>
             </flux:sidebar.nav>
 
