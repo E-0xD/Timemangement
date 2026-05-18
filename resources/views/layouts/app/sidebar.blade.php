@@ -72,6 +72,18 @@
                     </flux:sidebar.item>
                 </flux:sidebar.group>
 
+                {{-- Admin (visible only to admins) --}}
+                @if(Auth::user()->isAdmin())
+                <flux:sidebar.group :heading="__('Admin')" class="grid">
+                    <flux:sidebar.item icon="shield-check" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')" wire:navigate>
+                        {{ __('Admin Panel') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="users" :href="route('admin.users.index')" :current="request()->routeIs('admin.users.*')" wire:navigate>
+                        {{ __('Manage Users') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+                @endif
+
             </flux:sidebar.nav>
 
             <flux:spacer />

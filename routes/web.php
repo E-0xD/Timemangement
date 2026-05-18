@@ -12,6 +12,8 @@ use App\Http\Controllers\StudyGroupController;
 use App\Http\Controllers\StudySessionController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TimetableController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
@@ -67,6 +69,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('files', [FileController::class, 'store'])->name('files.store');
     Route::get('files/{file}/download', [FileController::class, 'download'])->name('files.download');
     Route::delete('files/{file}', [FileController::class, 'destroy'])->name('files.destroy');
+});
+
+// Admin
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::patch('users/{user}/role', [AdminUserController::class, 'toggleRole'])->name('users.toggle-role');
+    Route::resource('users', AdminUserController::class)->except(['create', 'store']);
 });
 
 require __DIR__.'/auth.php';

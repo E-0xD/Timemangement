@@ -50,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'xp_points',
         'study_streak',
         'last_study_date',
+        'notification_preferences',
     ];
 
     protected $hidden = [
@@ -60,11 +61,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
-            'role'              => UserRole::class,
-            'dark_mode'         => 'boolean',
-            'last_study_date'   => 'date',
+            'email_verified_at'        => 'datetime',
+            'password'                 => 'hashed',
+            'role'                     => UserRole::class,
+            'dark_mode'                => 'boolean',
+            'last_study_date'          => 'date',
+            'notification_preferences' => 'array',
         ];
     }
 
@@ -164,6 +166,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isStudent(): bool
     {
         return $this->role === UserRole::Student;
+    }
+
+    public function avatarUrl(): ?string
+    {
+        if (! $this->avatar) {
+            return null;
+        }
+
+        return \Illuminate\Support\Facades\Storage::disk('public')->url($this->avatar);
+    }
+
+    public function getNotificationPreference(string $type): bool
+    {
+        return (bool) (($this->notification_preferences ?? [])[$type] ?? true);
     }
 
     public function initials(): string
