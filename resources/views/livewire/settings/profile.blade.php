@@ -75,27 +75,6 @@
                 @error('bio') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
             </div>
 
-            <div class="grid gap-5 sm:grid-cols-2">
-                <div>
-                    <label class="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300">{{ __('Timezone') }}</label>
-                    <select wire:model="timezone"
-                            class="w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-indigo-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100">
-                        @foreach($timezones as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div>
-                    <label class="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300">{{ __('Language') }}</label>
-                    <select wire:model="language"
-                            class="w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-indigo-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100">
-                        @foreach($languages as $code => $name)
-                            <option value="{{ $code }}">{{ $name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
             <div class="flex items-center gap-4 pt-1">
                 <flux:button variant="primary" type="submit">{{ __('Save') }}</flux:button>
             </div>

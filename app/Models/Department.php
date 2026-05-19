@@ -14,7 +14,18 @@ class Department extends Model
         'name',
         'code',
         'description',
+        'user_id',
+        'is_custom',
     ];
+
+    protected $casts = [
+        'is_custom' => 'boolean',
+    ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function users(): HasMany
     {

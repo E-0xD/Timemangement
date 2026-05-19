@@ -20,8 +20,6 @@ class UserSeeder extends Seeder
                 'role'              => UserRole::Admin,
                 'email_verified_at' => now(),
                 'school'            => config('site.name'),
-                'timezone'          => 'UTC',
-                'language'          => 'en',
             ]
         );
 
@@ -35,8 +33,6 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'school'            => 'University of Demo',
                 'bio'               => 'A hardworking student using ' . config('site.name') . ' to stay on top of assignments.',
-                'timezone'          => 'UTC',
-                'language'          => 'en',
             ]
         );
     }

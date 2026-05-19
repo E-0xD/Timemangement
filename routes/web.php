@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\CalendarEventController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\GamificationController;
 use App\Http\Controllers\GoalController;
@@ -69,6 +70,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('files', [FileController::class, 'store'])->name('files.store');
     Route::get('files/{file}/download', [FileController::class, 'download'])->name('files.download');
     Route::delete('files/{file}', [FileController::class, 'destroy'])->name('files.destroy');
+
+    // Departments, Semesters & Courses
+    Route::get('departments', [DepartmentController::class, 'index'])->name('departments.index');
+    Route::post('departments', [DepartmentController::class, 'storeDepartment'])->name('departments.storeDepartment');
+    Route::delete('departments/{department}', [DepartmentController::class, 'destroyDepartment'])->name('departments.destroyDepartment');
+    Route::post('departments/courses', [DepartmentController::class, 'storeCourse'])->name('departments.storeCourse');
+    Route::delete('departments/courses/{course}', [DepartmentController::class, 'destroyCourse'])->name('departments.destroyCourse');
+    Route::post('departments/semesters', [DepartmentController::class, 'storeSemester'])->name('departments.storeSemester');
+    Route::delete('departments/semesters/{semester}', [DepartmentController::class, 'destroySemester'])->name('departments.destroySemester');
 });
 
 // Admin

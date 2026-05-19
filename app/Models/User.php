@@ -12,6 +12,7 @@ use App\Models\File;
 use App\Models\Goal;
 use App\Models\Message;
 use App\Models\Note;
+use App\Models\Semester;
 use App\Models\StudyGroup;
 use App\Models\StudyGroupMember;
 use App\Models\StudySession;
@@ -43,8 +44,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'school',
         'department_id',
-        'timezone',
-        'language',
         'telegram_chat_id',
         'dark_mode',
         'xp_points',
@@ -75,6 +74,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function ownedDepartments(): HasMany
+    {
+        return $this->hasMany(Department::class);
+    }
+
+    public function ownedSemesters(): HasMany
+    {
+        return $this->hasMany(Semester::class);
     }
 
     public function courses(): HasMany
