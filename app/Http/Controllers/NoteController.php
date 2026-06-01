@@ -74,14 +74,14 @@ class NoteController extends Controller
 
     public function show(Note $note): View
     {
-        abort_unless($note->user_id === Auth::id(), 403);
+        abort_unless((int) $note->user_id === (int) Auth::id(), 403);
 
         return view('notes.show', compact('note'));
     }
 
     public function edit(Note $note): View
     {
-        abort_unless($note->user_id === Auth::id(), 403);
+        abort_unless((int) $note->user_id === (int) Auth::id(), 403);
 
         $courses = Auth::user()->courses()->orderBy('name')->get();
 
@@ -90,7 +90,7 @@ class NoteController extends Controller
 
     public function update(UpdateNoteRequest $request, Note $note): RedirectResponse
     {
-        abort_unless($note->user_id === Auth::id(), 403);
+        abort_unless((int) $note->user_id === (int) Auth::id(), 403);
 
         try {
             $note->update($request->validated());
@@ -108,7 +108,7 @@ class NoteController extends Controller
 
     public function destroy(Note $note): RedirectResponse
     {
-        abort_unless($note->user_id === Auth::id(), 403);
+        abort_unless((int) $note->user_id === (int) Auth::id(), 403);
 
         try {
             $note->delete();

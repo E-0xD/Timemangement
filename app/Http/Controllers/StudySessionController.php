@@ -15,6 +15,16 @@ class StudySessionController extends Controller
 {
     public function focus(): View
     {
+        return $this->loadFocusView();
+    }
+
+    public function settings(): View
+    {
+        return view('focus.settings');
+    }
+
+    private function loadFocusView(bool $showSettings = false): View
+    {
         $todaySessions = StudySession::where('user_id', Auth::id())
             ->whereDate('started_at', today())
             ->whereNotNull('ended_at')
@@ -32,7 +42,7 @@ class StudySessionController extends Controller
             ->limit(15)
             ->get();
 
-        return view('focus.index', compact('todaySessions', 'todayMinutes', 'courses', 'tasks'));
+        return view('focus.index', compact('todaySessions', 'todayMinutes', 'courses', 'tasks', 'showSettings'));
     }
 
     public function store(StoreStudySessionRequest $request): RedirectResponse

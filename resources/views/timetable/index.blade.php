@@ -37,7 +37,7 @@
             @php
                 $gridStart  = 7 * 60;   // 07:00 in minutes
                 $gridEnd    = 22 * 60;   // 22:00 in minutes
-                $hourPx     = 64;        // px per hour
+                $hourPx     = 80;        // px per hour
                 $totalPx    = ($gridEnd - $gridStart) / 60 * $hourPx; // 960px
                 $hours      = range(7, 21);
                 $allDays    = \App\Enums\DayOfWeek::cases();
@@ -90,8 +90,8 @@
                             <div class="flex-shrink-0 w-14 relative select-none">
                                 @foreach ($hours as $hour)
                                     <div
-                                        class="absolute right-2 text-[10px] text-slate-400 dark:text-zinc-500 leading-none"
-                                        style="top: {{ ($hour - 7) * $hourPx - 6 }}px"
+                                        class="absolute right-2 text-[10px] font-medium text-slate-400 dark:text-zinc-500 leading-none"
+                                        style="top: {{ ($hour - 7) * $hourPx - 7 }}px"
                                     >
                                         {{ sprintf('%02d:00', $hour) }}
                                     </div>
@@ -129,12 +129,12 @@
                                             title="{{ $entry->title }} ({{ substr($entry->start_time, 0, 5) }}–{{ substr($entry->end_time, 0, 5) }})"
                                         >
                                             <div class="font-semibold truncate leading-tight">{{ $entry->title }}</div>
-                                            @if ($heightPx >= 38)
+                                            @if ($heightPx >= 32)
                                                 <div class="opacity-80 text-[10px] leading-tight mt-0.5">
                                                     {{ substr($entry->start_time, 0, 5) }}–{{ substr($entry->end_time, 0, 5) }}
                                                 </div>
                                             @endif
-                                            @if ($heightPx >= 56 && $entry->location)
+                                            @if ($heightPx >= 52 && $entry->location)
                                                 <div class="opacity-70 text-[10px] truncate leading-tight">
                                                     <span class="material-symbols-outlined" style="font-size:10px;vertical-align:-1px">location_on</span>
                                                     {{ $entry->location }}

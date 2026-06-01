@@ -65,7 +65,7 @@ class TimetableController extends Controller
 
     public function edit(Timetable $timetable): View
     {
-        abort_unless($timetable->user_id === Auth::id(), 403);
+        abort_unless((int) $timetable->user_id === (int) Auth::id(), 403);
 
         $courses = Auth::user()->courses()->orderBy('name')->get();
 
@@ -74,7 +74,7 @@ class TimetableController extends Controller
 
     public function update(UpdateTimetableRequest $request, Timetable $timetable): RedirectResponse
     {
-        abort_unless($timetable->user_id === Auth::id(), 403);
+        abort_unless((int) $timetable->user_id === (int) Auth::id(), 403);
 
         try {
             $data = $request->validated();
@@ -104,7 +104,7 @@ class TimetableController extends Controller
 
     public function destroy(Timetable $timetable): RedirectResponse
     {
-        abort_unless($timetable->user_id === Auth::id(), 403);
+        abort_unless((int) $timetable->user_id === (int) Auth::id(), 403);
 
         $timetable->delete();
 

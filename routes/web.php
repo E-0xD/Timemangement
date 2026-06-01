@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Focus Timer + Study Sessions
     Route::get('focus', [StudySessionController::class, 'focus'])->name('focus.index');
+    Route::get('focus/settings', [StudySessionController::class, 'settings'])->name('focus.settings');
     Route::post('sessions', [StudySessionController::class, 'store'])->name('sessions.store');
     Route::delete('sessions/{session}', [StudySessionController::class, 'destroy'])->name('sessions.destroy');
 
@@ -71,14 +72,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('files/{file}/download', [FileController::class, 'download'])->name('files.download');
     Route::delete('files/{file}', [FileController::class, 'destroy'])->name('files.destroy');
 
-    // Departments, Semesters & Courses
-    Route::get('departments', [DepartmentController::class, 'index'])->name('departments.index');
-    Route::post('departments', [DepartmentController::class, 'storeDepartment'])->name('departments.storeDepartment');
-    Route::delete('departments/{department}', [DepartmentController::class, 'destroyDepartment'])->name('departments.destroyDepartment');
-    Route::post('departments/courses', [DepartmentController::class, 'storeCourse'])->name('departments.storeCourse');
-    Route::delete('departments/courses/{course}', [DepartmentController::class, 'destroyCourse'])->name('departments.destroyCourse');
-    Route::post('departments/semesters', [DepartmentController::class, 'storeSemester'])->name('departments.storeSemester');
-    Route::delete('departments/semesters/{semester}', [DepartmentController::class, 'destroySemester'])->name('departments.destroySemester');
+    // Departments, Semesters & Courses  (mounted at /academic, /departments redirects here)
+    Route::get('departments', fn() => redirect()->route('academic.index'))->name('departments.index');
+    Route::prefix('academic')->name('academic.')->group(function () {
+        Route::get('/', [DepartmentController::class, 'index'])->name('index');
+
+        Route::post('departments', [DepartmentController::class, 'storeDepartment'])->name('departments.store');
+        Route::patch('departments/{department}', [DepartmentController::class, 'updateDepartment'])->name('departments.update');
+        Route::delete('departments/{department}', [DepartmentController::class, 'destroyDepartment'])->name('departments.destroy');
+
+        Route::post('courses', [DepartmentController::class, 'storeCourse'])->name('courses.store');
+        Route::patch('courses/{course}', [DepartmentController::class, 'updateCourse'])->name('courses.update');
+        Route::delete('courses/{course}', [DepartmentController::class, 'destroyCourse'])->name('courses.destroy');
+
+        Route::post('semesters', [DepartmentController::class, 'storeSemester'])->name('semesters.store');
+        Route::patch('semesters/{semester}', [DepartmentController::class, 'updateSemester'])->name('semesters.update');
+        Route::delete('semesters/{semester}', [DepartmentController::class, 'destroySemester'])->name('semesters.destroy');
+    });
 });
 
 // Admin

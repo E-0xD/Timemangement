@@ -89,14 +89,14 @@
                     <h2 class="mb-3 mt-6 text-sm font-semibold text-zinc-700 dark:text-zinc-300">Locked</h2>
                     <div class="grid gap-3 sm:grid-cols-2">
                         @foreach($locked as $achievement)
-                            <div class="flex items-start gap-3 rounded-xl border border-zinc-200 bg-zinc-50 p-4 opacity-60 dark:border-zinc-700 dark:bg-zinc-800/50">
-                                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-zinc-300 bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-700">
+                            <div class="flex items-start gap-3 rounded-xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900 opacity-60">
+                                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800">
                                     <span class="material-symbols-outlined text-xl leading-none text-zinc-400 dark:text-zinc-500">lock</span>
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{{ $achievement->name }}</p>
                                     <p class="text-xs text-zinc-500 dark:text-zinc-400">{{ $achievement->description }}</p>
-                                    <span class="mt-1 inline-block rounded-full bg-zinc-200 px-2 py-0.5 text-[10px] font-medium text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400">
+                                    <span class="mt-1 inline-block rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
                                         +{{ $achievement->xp_value }} XP
                                     </span>
                                 </div>

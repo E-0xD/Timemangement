@@ -37,8 +37,8 @@
                     <flux:sidebar.item icon="calendar-days" :href="route('calendar.index')" :current="request()->routeIs('calendar.*')" wire:navigate>
                         {{ __('Calendar') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="building-library" :href="route('departments.index')" :current="request()->routeIs('departments.*')" wire:navigate>
-                        {{ __('Departments') }}
+                    <flux:sidebar.item icon="building-library" :href="route('academic.index')" :current="request()->routeIs('academic.*')" wire:navigate>
+                        {{ __('Academic') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
 

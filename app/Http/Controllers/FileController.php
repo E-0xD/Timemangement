@@ -85,14 +85,14 @@ class FileController extends Controller
 
     public function download(File $file): StreamedResponse
     {
-        abort_unless($file->user_id === Auth::id(), 403);
+        abort_unless((int) $file->user_id === (int) Auth::id(), 403);
 
         return Storage::disk('private')->download($file->path, $file->original_name);
     }
 
     public function destroy(File $file): RedirectResponse
     {
-        abort_unless($file->user_id === Auth::id(), 403);
+        abort_unless((int) $file->user_id === (int) Auth::id(), 403);
 
         try {
             Storage::disk('private')->delete($file->path);

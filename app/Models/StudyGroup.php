@@ -72,6 +72,7 @@ class StudyGroup extends Model
     {
         $member = $this->memberRecords()->where('user_id', $userId)->first();
 
-        return $member ? GroupRole::from($member->role) : null;
+        // $member->role is already cast to GroupRole by StudyGroupMember::$casts
+        return $member?->role instanceof GroupRole ? $member->role : null;
     }
 }

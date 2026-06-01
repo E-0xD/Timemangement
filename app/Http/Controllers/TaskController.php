@@ -103,7 +103,7 @@ class TaskController extends Controller
     public function show(Task $task): View
     {
         try {
-            abort_unless($task->user_id === Auth::id(), 403);
+            abort_unless((int) $task->user_id === (int) Auth::id(), 403);
 
             $task->load('subtasks', 'course');
 
@@ -117,7 +117,7 @@ class TaskController extends Controller
     public function edit(Task $task): View
     {
         try {
-            abort_unless($task->user_id === Auth::id(), 403);
+            abort_unless((int) $task->user_id === (int) Auth::id(), 403);
 
             $task->load('subtasks');
             $courses      = Auth::user()->courses()->orderBy('name')->get();
@@ -136,7 +136,7 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, Task $task): RedirectResponse
     {
         try {
-            abort_unless($task->user_id === Auth::id(), 403);
+            abort_unless((int) $task->user_id === (int) Auth::id(), 403);
 
             $data     = $request->validated();
             $subtasks = $data['subtasks'] ?? null;
@@ -177,7 +177,7 @@ class TaskController extends Controller
     public function destroy(Task $task): RedirectResponse
     {
         try {
-            abort_unless($task->user_id === Auth::id(), 403);
+            abort_unless((int) $task->user_id === (int) Auth::id(), 403);
 
             $task->delete();
 
@@ -192,7 +192,7 @@ class TaskController extends Controller
     public function toggle(Task $task): RedirectResponse
     {
         try {
-            abort_unless($task->user_id === Auth::id(), 403);
+            abort_unless((int) $task->user_id === (int) Auth::id(), 403);
 
             if ($task->status === TaskStatus::Completed) {
                 $task->update(['status' => TaskStatus::Pending->value, 'completed_at' => null]);
@@ -211,7 +211,7 @@ class TaskController extends Controller
     public function toggleSubtask(Task $task, Subtask $subtask): RedirectResponse
     {
         try {
-            abort_unless($task->user_id === Auth::id(), 403);
+            abort_unless((int) $task->user_id === (int) Auth::id(), 403);
             abort_unless($subtask->task_id === $task->id, 403);
 
             $subtask->toggleComplete();

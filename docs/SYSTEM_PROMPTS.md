@@ -44,7 +44,7 @@ try {
         'error'   => $e->getMessage(),
         // ... relevant context
     ]);
-    throw $e;
+    return back();
 }
 ```
 
